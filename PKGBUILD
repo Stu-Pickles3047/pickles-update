@@ -6,9 +6,9 @@ maintainer="Stu-Pickles3407 <stu.pickles.stu@gmail.com>"
 # The name of the package.
 pkgname="pickles-update"
 # The version of the package. This should be updated for each release.
-pkgver=1.0.0
+pkgver=b2.0.0
 # The release number of the package. Increment this for changes that don't affect the version.
-pkgrel=2
+pkgrel=1
 # A brief description of the package.
 pkgdesc="A wrapper for paru to update Pickles Linux distros"
 # The URL for the project's homepage or repository.
@@ -22,7 +22,7 @@ arch=('any')
 source=("update.sh" "update.1.gz")
 # The checksums to verify the integrity of the source files.
 # You will generate these later with 'makepkg -g'.
-sha256sums=('SKIP' 'SKIP')
+#sha256sums=('SKIP' 'SKIP')
 # Dependencies required at runtime.
 # 'paru' is the main dependency for the script.
 # 'lsb-release' is used to get the OS name.
