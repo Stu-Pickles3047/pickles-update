@@ -38,6 +38,19 @@ wget -O "$FILENAME" "$DOWNLOAD_URL"
 # Check if the download was successful
 if [ $? -eq 0 ]; then
     echo "Download completed successfully! File saved as $FILENAME."
+    echo "Installing Pickles Update"
+
+    # Check if pickles-update is already installed using pacman's query command.
+    # We redirect output to /dev/null because we only care about the exit code.
+    if pacman -Q pickles-update > /dev/null 2>&1; then
+        echo "Existing installation found. Removing..."
+        # Remove the existing package using pacman -R (remove).
+        sudo pacman -R pickles-update
+    fi
+
+    # Install the new package using pacman -U (upgrade/install local file).
+    sudo pacman -U "$FILENAME"
+    echo "Installation complete!"
 else
     echo "Error: Download failed."
     exit 1
