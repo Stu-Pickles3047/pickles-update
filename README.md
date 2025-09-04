@@ -13,7 +13,8 @@ A user-friendly wrapper script for `paru` to manage system updates on Arch Linux
 To install `pickles-update`, you can use `paru` directly from this Git repository. This is the recommended method as it handles all dependencies automatically.
 
 ```bash
-paru -U https://github.com/Stu-Pickles3047/pickles-update/blob/main/pickles-update-1.0.0-2-any.pkg.tar.zst```
+paru -U https://github.com/Stu-Pickles3047/pickles-update/blob/main/pickles-update-1.0.0-2-any.pkg.tar.zst
+```
 
 ## 🛠 Usage
 
