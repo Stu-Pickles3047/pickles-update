@@ -1,1 +1,1 @@
-/home/stu/Pickles-Update/update.sh
+/home/stu/pickles-update/update.sh
