@@ -7,6 +7,40 @@
 
 #clear screen
 clear
+#!/bin/bash
+
+# --- Function to display version ---
+show_version() {
+    version=$(pacman -Qi pickles-update | grep Version | awk '{print $3}')
+    echo "$(tput setaf 5)Pickles Update$(tput sgr0) Version: $(tput setaf 2)$version$(tput sgr0)"
+}
+
+# --- Function to display help ---
+show_help() {
+    cat << EOF
+Usage: $(basename "$0") [OPTIONS]
+
+This script performs pickles-related updates.
+
+Options:
+  -v, --version  Display the script version.
+  -h, --help     Display this help message.
+
+man update also provides help
+EOF
+}
+
+# --- Main script logic ---
+
+# Check for arguments and handle them
+if [[ "$1" == "-v" || "$1" == "--version" ]]; then
+    show_version
+    exit 0
+elif [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
 
 #Get OS and Save as Variable
 os_name_raw=$(lsb_release -i | awk -F: '{print $2}' | xargs)

@@ -1,0 +1,23 @@
+# This script is executed by pacman after the package is installed.
+
+# This function runs after the package files have been installed.
+post_install() {
+  # Run mandb to update the manual page index caches.
+  # The output is redirected to /dev/null to keep it silent.
+  echo "Updating man-db..."
+  /usr/bin/mandb &>/dev/null
+}
+
+# This function runs after the package has been upgraded.
+post_upgrade() {
+  # Run mandb to update the manual page index caches.
+  echo "Updating man-db..."
+  /usr/bin/mandb &>/dev/null
+}
+
+# This function runs after the package has been removed.
+post_remove() {
+  # Run mandb to update the manual page index caches.
+  echo "Updating man-db..."
+  /usr/bin/mandb &>/dev/null
+}

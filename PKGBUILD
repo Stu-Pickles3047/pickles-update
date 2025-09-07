@@ -6,9 +6,9 @@ maintainer="Stu-Pickles3407 <stu.pickles.stu@gmail.com>"
 # The name of the package.
 pkgname="pickles-update"
 # The version of the package. This should be updated for each release.
-pkgver=b2.0.0
+pkgver=2.0.Beta0
 # The release number of the package. Increment this for changes that don't affect the version.
-pkgrel=2
+pkgrel=4
 # A brief description of the package.
 pkgdesc="A wrapper for paru to update Pickles Linux distros"
 # The URL for the project's homepage or repository.
@@ -22,7 +22,7 @@ arch=('any')
 source=("update.sh" "update.1.gz")
 # The checksums to verify the integrity of the source files.
 # You will generate these later with 'makepkg -g'.
-#sha256sums=('SKIP' 'SKIP')
+sha256sums=('SKIP' 'SKIP')
 # Dependencies required at runtime.
 # 'paru' is the main dependency for the script.
 # 'lsb-release' is used to get the OS name.
@@ -38,8 +38,5 @@ package() {
   # Create the directory for the man page.
   install -D -m644 "update.1.gz" "${pkgdir}/usr/share/man/man1/update.1.gz"
 }
-
-sha256sums=('44885f5ee682ad647c92a192813186c8250bba45bce2cb252715314d578e7d00'
-            '0c887263ca49da621ea2a51f18322aeef4719ebe6a2c76eb255677653f925113')
-sha256sums=('44885f5ee682ad647c92a192813186c8250bba45bce2cb252715314d578e7d00'
-            '0c887263ca49da621ea2a51f18322aeef4719ebe6a2c76eb255677653f925113')
+sha256sums=('ddebd474dd5360b0b41a763709d4a7ceb9d0afc1af98e89018db37e43fa1385d'
+            'f792846b952f7c39a805534ad433c7ee6ff298cefb6d26e37d47ee91a0d7240e')
