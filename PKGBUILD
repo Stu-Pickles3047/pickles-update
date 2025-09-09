@@ -8,7 +8,7 @@ pkgname="pickles-update"
 # The version of the package. This should be updated for each release.
 pkgver=2.0.Beta0
 # The release number of the package. Increment this for changes that don't affect the version.
-pkgrel=4
+pkgrel=5
 # A brief description of the package.
 pkgdesc="A wrapper for paru to update Pickles Linux distros"
 # The URL for the project's homepage or repository.

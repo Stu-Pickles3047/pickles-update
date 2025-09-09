@@ -45,22 +45,23 @@ fi
 #Get OS and Save as Variable
 os_name_raw=$(lsb_release -i | awk -F: '{print $2}' | xargs)
 os_name=${os_name_raw,,} # Convert to lowercase
+os_pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | cut -d'=' -f2 | tr -d '"')
 
 echo "      Welcome to $(tput setaf 5)Pickles Update$(tput sgr0)"
-echo "      $(tput setaf 5)::>> $(tput sgr0)Updating: $os_name"
+echo "      $(tput setaf 5)::>> $(tput sgr0)Updating: $os_pretty_name"
 echo ""
 sleep 2
 
 # Check for -mirrors or -m argument
 if [[ "$1" == "-mirrors" || "$1" == "-m" ]]; then
-    echo "Rating mirrors..."
+    echo "Rating $os_name mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
     rate-mirrors "$os_name" | sudo tee /etc/pacman.d/$os_name-mirrorlist
 else
     echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating skipped. Run with -mirrors or -m to rate mirrors."
     echo ""
 fi
-
-echo "$(tput setaf 5)::>> $(tput sgr0)Running Paru to update $os_name"
+echo ""
+echo "$(tput setaf 5)::>> $(tput sgr0)Running Paru to update $os_pretty_name "
 echo ""
 sleep 2
 paru --skipreview --sudoloop -Syu
