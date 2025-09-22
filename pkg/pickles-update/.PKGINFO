@@ -3,12 +3,12 @@
 pkgname = pickles-update
 pkgbase = pickles-update
 xdata = pkgtype=pkg
-pkgver = 2.0.Beta0-4
+pkgver = 2.0.Beta0-6
 pkgdesc = A wrapper for paru to update Pickles Linux distros
 url = https://github.com/Stu-Pickles3047/pickles-update
-builddate = 1757230968
+builddate = 1758512384
 packager = Unknown Packager
-size = 2797
+size = 3376
 arch = any
 license = Unlicense license
 depend = paru

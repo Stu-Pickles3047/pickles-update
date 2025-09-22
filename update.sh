@@ -30,6 +30,17 @@ man update also provides help
 EOF
 }
 
+# --- Function to backup mirrorlist ---
+backup_mirrorlist() {
+    echo "$(tput sgr0)Backing up Mirrorlist for $(tput setaf 5)$os_pretty_name$(tput sgr0)"
+
+    if [ -f /etc/pacman.d/mirrorlist.bak ]; then
+        sudo rm /etc/pacman.d/mirrorlist.bak
+    fi
+
+    sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+}
+
 # --- Main script logic ---
 
 # Check for arguments and handle them
@@ -54,8 +65,10 @@ sleep 2
 
 # Check for -mirrors or -m argument
 if [[ "$1" == "-mirrors" || "$1" == "-m" ]]; then
+
     echo "Rating $os_name mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
-    rate-mirrors "$os_name" | sudo tee /etc/pacman.d/$os_name-mirrorlist
+    backup_mirrorlist
+    rate-mirrors "$os_name" | sudo tee /etc/pacman.d/mirrorlist
 else
     echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating skipped. Run with -mirrors or -m to rate mirrors."
     echo ""
@@ -67,8 +80,11 @@ sleep 2
 paru --skipreview --sudoloop -Syu
 
 #FINISH
+
 echo "-------------------------------------------"
 echo "$(tput setaf 5)::>> $(tput sgr0)Done"
+echo "$(tput setaf 5)::>> $(tput sgr0)Total of $(tput setaf 5)$(pacman -Qq | wc -l)$(tput sgr0) Packages installed"
+echo ""
 read -p "$(tput setaf 5)::>> $(tput sgr0)Do you wish to reboot? (y/N) " choice
 if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
     echo "$(tput setaf 5)::>> $(tput sgr0)Rebooting now..."
