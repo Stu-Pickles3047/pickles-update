@@ -6,9 +6,9 @@ maintainer="Stu-Pickles3407 <stu.pickles.stu@gmail.com>"
 # The name of the package.
 pkgname="pickles-update"
 # The version of the package. This should be updated for each release.
-pkgver=2.0.Beta0
+pkgver=2.0.1
 # The release number of the package. Increment this for changes that don't affect the version.
-pkgrel=6
+pkgrel=1
 # A brief description of the package.
 pkgdesc="A wrapper for paru to update Pickles Linux distros"
 # The URL for the project's homepage or repository.
@@ -38,5 +38,5 @@ package() {
   # Create the directory for the man page.
   install -D -m644 "update.1.gz" "${pkgdir}/usr/share/man/man1/update.1.gz"
 }
-sha256sums=('3a38a49ac4c9d341397683a0d614833fabed8b3b9985f30c34437fe99bc74752'
+sha256sums=('f6e7851174feeca01ff2bda5f64f4047a60459a6b5188560cab60cb28be5b29b'
             'f792846b952f7c39a805534ad433c7ee6ff298cefb6d26e37d47ee91a0d7240e')

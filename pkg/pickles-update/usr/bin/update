@@ -32,9 +32,13 @@ EOF
 
 # --- Function to backup mirrorlist ---
 backup_mirrorlist() {
-        echo "$(tput sgr0) Backing up Mirrorlist for $(tput setaf 5)$os_pretty_name $(tput sgr0)"
+    echo "$(tput sgr0)Backing up Mirrorlist for $(tput setaf 5)$os_pretty_name$(tput sgr0)"
+
+    if [ -f /etc/pacman.d/mirrorlist.bak ]; then
         sudo rm /etc/pacman.d/mirrorlist.bak
-        sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+    fi
+
+    sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 }
 
 # --- Main script logic ---
