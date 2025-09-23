@@ -8,7 +8,7 @@ pkgname="pickles-update"
 # The version of the package. This should be updated for each release.
 pkgver=3.0.Beta.
 # The release number of the package. Increment this for changes that don't affect the version.
-pkgrel=2
+pkgrel=3
 # A brief description of the package.
 pkgdesc="A wrapper for paru to update Pickles Linux distros"
 # The URL for the project's homepage or repository.
@@ -39,4 +39,4 @@ package() {
   install -D -m644 "update.1.gz" "${pkgdir}/usr/share/man/man1/update.1.gz"
 }
 sha256sums=('a8b6cfc7674961f66aae548946feddf3e6cf5236c787b310f0831a65bd946e21'
-            'f792846b952f7c39a805534ad433c7ee6ff298cefb6d26e37d47ee91a0d7240e')
+            '8efe524ab0002d6d4351edc1cadaea38dc73325877d51e0ea2b8086e96d2a607')
