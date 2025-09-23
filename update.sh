@@ -3,7 +3,7 @@
 #Created by Stu-Pickles3407 for Pickles Linux
 #Add https://github.com/Stu-Pickles3047/pickles-update
 
-
+variable=$1
 
 #clear screen
 clear
@@ -37,17 +37,39 @@ backup_mirrorlist() {
     if [ -f /etc/pacman.d/mirrorlist.bak ]; then
         sudo rm /etc/pacman.d/mirrorlist.bak
     fi
+    if [ -f /etc/pacman.d/chaotic-mirrorlist.bak ]; then
+        sudo rm /etc/pacman.d/chaotic-mirrorlist.bak
+    fi
 
     sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+    sudo cp /etc/pacman.d/chaotic-mirrorlist /etc/pacman.d/chaotic-mirrorlist.bak
 }
 
+
+# --- Function to rate mirrors ---
+rate_mirrors() {
+# Check for -mirrors or -m argument
+if [[ "$variable" == "-mirrors" || "$variable" == "-m" ]]; then
+
+    echo "$(tput setaf 5)::>> $(tput sgr0)Rating $os_name mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
+    backup_mirrorlist
+    rate-mirrors "$os_name" | tee >(grep "Server =" | { echo "#Pickles Update "; echo "#Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/mirrorlist)
+    echo ""
+    echo "$(tput setaf 5)::>> $(tput sgr0)Rating Chaotic-AUR mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
+    sleep 2   
+    rate-mirrors "chaotic-aur" | tee >(grep "Server =" | { echo "#Pickles Update "; echo "#Chaotic Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/chaotic-mirrorlist)
+else
+    echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating skipped. Run with -mirrors or -m to rate mirrors."
+    echo ""
+fi
+}
 # --- Main script logic ---
 
 # Check for arguments and handle them
-if [[ "$1" == "-v" || "$1" == "--version" ]]; then
+if [[ "$variable" == "-v" || "$variable" == "--version" ]]; then
     show_version
     exit 0
-elif [[ "$1" == "-h" || "$1" == "--help" ]]; then
+elif [[ "$variable" == "-h" || "$variable" == "--help" ]]; then
     show_help
     exit 0
 fi
@@ -63,16 +85,8 @@ echo "      $(tput setaf 5)::>> $(tput sgr0)Updating: $os_pretty_name"
 echo ""
 sleep 2
 
-# Check for -mirrors or -m argument
-if [[ "$1" == "-mirrors" || "$1" == "-m" ]]; then
+rate_mirrors
 
-    echo "Rating $os_name mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
-    backup_mirrorlist
-rate-mirrors "$os_name" | tee >(grep "Server =" | { echo "#Pickles Update Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/mirrorlist)
-else
-    echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating skipped. Run with -mirrors or -m to rate mirrors."
-    echo ""
-fi
 echo ""
 echo "$(tput setaf 5)::>> $(tput sgr0)Running Paru to update $os_pretty_name "
 echo ""
