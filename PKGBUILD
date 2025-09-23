@@ -6,7 +6,7 @@ maintainer="Stu-Pickles3407 <stu.pickles.stu@gmail.com>"
 # The name of the package.
 pkgname="pickles-update"
 # The version of the package. This should be updated for each release.
-pkgver=2.0.1
+pkgver=3.0.Beta.
 # The release number of the package. Increment this for changes that don't affect the version.
 pkgrel=1
 # A brief description of the package.
@@ -38,5 +38,5 @@ package() {
   # Create the directory for the man page.
   install -D -m644 "update.1.gz" "${pkgdir}/usr/share/man/man1/update.1.gz"
 }
-sha256sums=('f6e7851174feeca01ff2bda5f64f4047a60459a6b5188560cab60cb28be5b29b'
+sha256sums=('0b11063646d48069879a2c7f4e8dfadd0e264c201f3253e95ff6a76ec69a557a'
             'f792846b952f7c39a805534ad433c7ee6ff298cefb6d26e37d47ee91a0d7240e')
