@@ -1,0 +1,95 @@
+#! /bin/bash
+#PICKLES UPDATE
+#Created by Stu-Pickles3407 for Pickles Linux
+#Add website
+#Add repo
+
+
+#clear screen
+clear
+#!/bin/bash
+
+# --- Function to display version ---
+show_version() {
+    version=$(pacman -Qi pickles-update | grep Version | awk '{print $3}')
+    echo "$(tput setaf 5)Pickles Update$(tput sgr0) Version: $(tput setaf 2)$version$(tput sgr0)"
+}
+
+# --- Function to display help ---
+show_help() {
+    cat << EOF
+Usage: $(basename "$0") [OPTIONS]
+
+This script performs pickles-related updates.
+
+Options:
+  -v, --version  Display the script version.
+  -h, --help     Display this help message.
+
+man update also provides help
+EOF
+}
+
+# --- Function to backup mirrorlist ---
+backup_mirrorlist() {
+    echo "$(tput sgr0)Backing up Mirrorlist for $(tput setaf 5)$os_pretty_name$(tput sgr0)"
+
+    if [ -f /etc/pacman.d/mirrorlist.bak ]; then
+        sudo rm /etc/pacman.d/mirrorlist.bak
+    fi
+
+    sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+}
+
+# --- Main script logic ---
+
+# Check for arguments and handle them
+if [[ "$1" == "-v" || "$1" == "--version" ]]; then
+    show_version
+    exit 0
+elif [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
+
+#Get OS and Save as Variable
+os_name_raw=$(lsb_release -i | awk -F: '{print $2}' | xargs)
+os_name=${os_name_raw,,} # Convert to lowercase
+os_pretty_name=$(cat /etc/os-release | grep PRETTY_NAME | cut -d'=' -f2 | tr -d '"')
+
+echo "      Welcome to $(tput setaf 5)Pickles Update$(tput sgr0)"
+echo "      $(tput setaf 5)::>> $(tput sgr0)Updating: $os_pretty_name"
+echo ""
+sleep 2
+
+# Check for -mirrors or -m argument
+if [[ "$1" == "-mirrors" || "$1" == "-m" ]]; then
+
+    echo "Rating $os_name mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
+    backup_mirrorlist
+    rate-mirrors "$os_name" | sudo tee /etc/pacman.d/mirrorlist
+else
+    echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating skipped. Run with -mirrors or -m to rate mirrors."
+    echo ""
+fi
+echo ""
+echo "$(tput setaf 5)::>> $(tput sgr0)Running Paru to update $os_pretty_name "
+echo ""
+sleep 2
+paru --skipreview --sudoloop -Syu
+
+#FINISH
+
+echo "-------------------------------------------"
+echo "$(tput setaf 5)::>> $(tput sgr0)Done"
+echo "$(tput setaf 5)::>> $(tput sgr0)Total of $(tput setaf 5)$(pacman -Qq | wc -l)$(tput sgr0) Packages installed"
+echo ""
+read -p "$(tput setaf 5)::>> $(tput sgr0)Do you wish to reboot? (y/N) " choice
+if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
+    echo "$(tput setaf 5)::>> $(tput sgr0)Rebooting now..."
+    reboot
+else
+    echo "$(tput setaf 5)::>> $(tput sgr0)Exiting without reboot."
+    exit 0
+fi
