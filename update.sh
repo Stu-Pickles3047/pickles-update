@@ -51,13 +51,14 @@ rate_mirrors() {
 # Check for -mirrors or -m argument
 if [[ "$variable" == "-mirrors" || "$variable" == "-m" ]]; then
 
-    echo "$(tput setaf 5)::>> $(tput sgr0)Rating $os_name mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
+    echo "$(tput setaf 5)::>> $(tput sgr0)Rating $os_name and Chaotic-aur mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
     backup_mirrorlist
-    rate-mirrors "$os_name" | tee >(grep "Server =" | { echo "#Pickles Update "; echo "#Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/mirrorlist)
+    sleep 2
+    rate-mirrors "$os_name" | tee >(grep "Server =" | { echo "#Pickles Update "; echo "#Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/mirrorlist) &
+    rate-mirrors "chaotic-aur" | tee >(grep "Server =" | { echo "#Pickles Update "; echo "#Chaotic Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/chaotic-mirrorlist) &
+    wait
+    echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating complete."
     echo ""
-    echo "$(tput setaf 5)::>> $(tput sgr0)Rating Chaotic-AUR mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
-    sleep 2   
-    rate-mirrors "chaotic-aur" | tee >(grep "Server =" | { echo "#Pickles Update "; echo "#Chaotic Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/chaotic-mirrorlist)
 else
     echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating skipped. Run with -mirrors or -m to rate mirrors."
     echo ""
@@ -102,6 +103,7 @@ echo ""
 read -p "$(tput setaf 5)::>> $(tput sgr0)Do you wish to reboot? (y/N) " choice
 if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
     echo "$(tput setaf 5)::>> $(tput sgr0)Rebooting now..."
+    sleep 2
     reboot
 else
     echo "$(tput setaf 5)::>> $(tput sgr0)Exiting without reboot."
