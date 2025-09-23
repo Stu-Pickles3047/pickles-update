@@ -68,7 +68,7 @@ if [[ "$1" == "-mirrors" || "$1" == "-m" ]]; then
 
     echo "Rating $os_name mirrors for $(tput setaf 5)$os_pretty_name $(tput sgr0) "
     backup_mirrorlist
-    rate-mirrors "$os_name" | sudo tee /etc/pacman.d/mirrorlist
+rate-mirrors "$os_name" | tee >(grep "Server =" | { echo "#Pickles Update Mirrorlist"; echo "#for $os_pretty_name "; echo ""; cat; } | sudo tee /etc/pacman.d/mirrorlist)
 else
     echo "$(tput setaf 5)::>> $(tput sgr0)Mirror rating skipped. Run with -mirrors or -m to rate mirrors."
     echo ""
