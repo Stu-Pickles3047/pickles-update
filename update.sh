@@ -1,8 +1,8 @@
 #! /bin/bash
 #PICKLES UPDATE
 #Created by Stu-Pickles3407 for Pickles Linux
-#Add website
-#Add repo
+#Add https://github.com/Stu-Pickles3047/pickles-update
+
 
 
 #clear screen
