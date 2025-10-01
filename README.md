@@ -1,5 +1,8 @@
 # Pickles Update
 
+## NO CURRENT BETA -- SEE MAIN or DEV
+
+
 A user-friendly wrapper script for `paru` to manage system updates on Arch Linux-based distributions like Pickles Linux. This tool simplifies the update process, includes an optional mirror rating feature, and prompts for a reboot after a successful update.
 
 ## 🚀 Features
@@ -19,30 +22,7 @@ chmod +x download_latest.sh
 
 ```
 
-## 🛠 Usage
-
-Once installed, you can run the `update` command from your terminal.
-
-- To run a standard system update:
-  ```bash
-  update
-  ```
-
-- To run a system update and rate mirrors first (recommended for faster downloads):
-  ```bash
-  update --mirrors
-  # or using the shorthand
-  update -m
-  ```
-
-## 📄 Man Page
-
-A man page is included with the package. You can view it by running:
-
-```bash
-man update
-```
-
+ 
 ## 📜 License
 
-This project is licensed under the Unlicense.
+This project is licensed under the Unlicense
