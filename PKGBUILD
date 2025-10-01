@@ -6,7 +6,7 @@ maintainer="Stu-Pickles3407 <stu.pickles.stu@gmail.com>"
 # The name of the package.
 pkgname="pickles-update"
 # The version of the package. This should be updated for each release.
-pkgver=2.0.1
+pkgver=3.1.0.
 # The release number of the package. Increment this for changes that don't affect the version.
 pkgrel=1
 # A brief description of the package.
@@ -22,7 +22,8 @@ arch=('any')
 source=("update.sh" "update.1.gz")
 # The checksums to verify the integrity of the source files.
 # You will generate these later with 'makepkg -g'.
-sha256sums=('SKIP' 'SKIP')
+sha256sums=('a8b6cfc7674961f66aae548946feddf3e6cf5236c787b310f0831a65bd946e21'
+            'f5332a4d2e6fd953f8e13026e2bbfdcdc2c94cac2bfc7fa04e1fa204f48c05af')
 # Dependencies required at runtime.
 # 'paru' is the main dependency for the script.
 # 'lsb-release' is used to get the OS name.
@@ -36,7 +37,5 @@ package() {
   # Create the directory for the executable script.
   install -D -m755 "update.sh" "${pkgdir}/usr/bin/update"
   # Create the directory for the man page.
-  install -D -m644 "update.1.gz" "${pkgdir}/usr/share/man/man1/update.1.gz"
+  install -D -m644 "update.1.gz" "${pkgdir}/usr/share/man/man1/pickles-update.1.gz"
 }
-sha256sums=('f6e7851174feeca01ff2bda5f64f4047a60459a6b5188560cab60cb28be5b29b'
-            'f792846b952f7c39a805534ad433c7ee6ff298cefb6d26e37d47ee91a0d7240e')
