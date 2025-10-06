@@ -1,0 +1,11 @@
+Based on analysis of the codebase, here are suggestions for streamlining the script to use options similar to paru while preserving the custom -m mirror rating feature:
+Remove use of paru
+Create scripts to:
+rate mirrors including backup of mirrorlists
+query for updates
+pacman update 
+aur update
+log errors
+call rate mirr
+
+shorten pickles-update to only call needed

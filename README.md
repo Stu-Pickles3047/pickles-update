@@ -1,48 +1,82 @@
 # Pickles Update
 
-A user-friendly wrapper script for `paru` to manage system updates on Arch Linux-based distributions like Pickles Linux. This tool simplifies the update process, includes an optional mirror rating feature, and prompts for a reboot after a successful update.
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![project_license][license-shield]][license-url]
+
+A modular script suite for managing system updates on Arch Linux-based distributions like Pickles Linux. This tool automates the update process, includes mirror rating, package querying, and separate handling for pacman and AUR updates, with a reboot prompt after successful updates.
 
 ## 🚀 Features
 
-- **Automated Updates**: Runs `paru -Syu` to update all packages.
-- **Mirror Rating**: Optionally finds and uses the fastest mirrors for your system using `rate-mirrors`.
-- **Reboot Prompt**: Asks for a reboot after the update to ensure all changes, especially kernel updates, are applied correctly.
+- **Modular Design**: Separate scripts for different operations (`pickles-update.sh`, `pacman-update.sh`, `aur-update.sh`, `query-updates.sh`, `rate-mirrors.sh`).
+- **Automated Updates**: Updates packages from official repositories and AUR.
+- **Mirror Rating**: Finds and uses the fastest mirrors for improved download speeds.
+- **Configuration**: Customizable settings via `pupdate.conf`.
+- **Reboot Prompt**: Asks for a reboot after updates to apply changes.
+
+## 🛠 Built With
+
+* ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
 ## 📦 Installation
 
-To install `pickles-update`, you can use `paru` directly from this Git repository. This is the recommended method as it handles all dependencies automatically.
+To install `pickles-update`, build and install the package using `makepkg`:
 
 ```bash
-wget https://raw.githubusercontent.com/Stu-Pickles3047/pickles-update/main/download_latest.sh
-chmod +x download_latest.sh
-./download_latest.sh
-
+git clone https://github.com/Stu-Pickles3047/pickles-update.git
+cd pickles-update
+makepkg -si
 ```
+
+This will install the scripts to `/etc/pickles-linux/pickles-update/` and create symlinks in `/usr/bin`.
 
 ## 🛠 Usage
 
-Once installed, you can run the `update` command from your terminal.
+Once installed, use the `pickles-update` or `pupdate` commands.
 
 - To run a standard system update:
   ```bash
-  update
+  pickles-update
+  # or
+  pupdate
   ```
 
-- To run a system update and rate mirrors first (recommended for faster downloads):
+- To update and rate mirrors first:
   ```bash
-  update --mirrors
-  # or using the shorthand
-  update -m
+  pickles-update -m
+  # or
+  pupdate --mirrors
   ```
+
+- To install specific packages:
+  ```bash
+  pickles-update -S package1 package2
+  ```
+
+- Other options: See `pickles-update --help` for full usage.
 
 ## 📄 Man Page
 
-A man page is included with the package. You can view it by running:
+A man page is included. View it with:
 
 ```bash
-man update
+man pickles-update
 ```
 
 ## 📜 License
 
 This project is licensed under the Unlicense.
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/Stu-Pickles3047/pickles-update.svg?style=for-the-badge
+[contributors-url]: https://github.com/Stu-Pickles3047/pickles-update/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Stu-Pickles3047/pickles-update.svg?style=for-the-badge
+[forks-url]: https://github.com/Stu-Pickles3047/pickles-update/network/members
+[stars-shield]: https://img.shields.io/github/stars/Stu-Pickles3047/pickles-update.svg?style=for-the-badge
+[stars-url]: https://github.com/Stu-Pickles3047/pickles-update/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Stu-Pickles3047/pickles-update.svg?style=for-the-badge
+[issues-url]: https://github.com/Stu-Pickles3047/pickles-update/issues
+[license-shield]: https://img.shields.io/github/license/Stu-Pickles3047/pickles-update.svg?style=for-the-badge
+[license-url]: https://github.com/Stu-Pickles3047/pickles-update/blob/main/LICENSE

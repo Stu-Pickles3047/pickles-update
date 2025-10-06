@@ -1,0 +1,74 @@
+.TH pickles-update 1 "September 24, 2025" "Pickles Update" "User Commands"
+.SH NAME
+pickles-update - a script to perform system updates on Pickles Linux
+.SH SYNOPSIS
+.B update
+[
+.B \-h
+|
+.B \-\-help
+]
+[
+.B \-v
+|
+.B \-\-version
+]
+[
+.B \-m
+|
+.B \-mirrors
+]
+.SH DESCRIPTION
+The
+.B update
+script automates the process of updating a Pickles Linux system using the
+.B paru
+package manager. It automatically detects the operating system, updates the package list, and upgrades all installed packages.
+.P
+The script also provides an optional feature to rate and update the package mirrors for improved download speeds. After the update is complete, the user is prompted to reboot the system.
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+Displays a help message with the available options and a brief description of the script's functionality.
+.TP
+.B \-v, \-\-version
+Displays the version of the
+.B pickles-update
+script.
+.TP
+.B \-m, \-mirrors
+This option tells the script to run
+.B rate-mirrors
+before the update. This process creates backup of mirrorlists and rates the available package mirrors and creates a new mirrorlist file, which can lead to faster downloads by using the most responsive mirrors.
+.SH EXAMPLES
+To simply run a standard system update:
+.P
+.B update
+.P
+To update the system and also rate the mirrors beforehand:
+.P
+.B update -m
+.P
+To display the script's version:
+.P
+.B update -v
+.SH NOTES
+.RS
+.IP *
+This script requires
+.B paru
+and
+.B rate-mirrors
+to be installed on the system.
+.IP *
+The script should not be run with
+.B sudo
+Script will use
+.B sudo
+as required
+.IP *
+A reboot is often recommended after a significant system update to ensure all changes take effect.
+.RE
+.SH SEE ALSO
+.BR paru (1),
+.BR rate-mirrors (1)

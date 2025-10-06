@@ -1,0 +1,1 @@
+/home/stu/tmp-Project/rate-mirrors.sh

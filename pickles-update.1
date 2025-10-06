@@ -1,0 +1,90 @@
+.TH pickles-update 1 "October 6, 2025" "Pickles Update" "User Commands"
+.SH NAME
+pickles-update, pupdate - a script to perform system updates on Pickles Linux
+.SH SYNOPSIS
+.B pickles-update
+[
+.B OPTIONS
+]
+.B pickles-update
+.B -S
+.I packages
+.P
+.B pupdate
+[
+.B OPTIONS
+]
+.B pupdate
+.B -S
+.I packages
+.SH DESCRIPTION
+The
+.B pickles-update
+script automates the process of updating a Pickles Linux system. It automatically detects the operating system, updates the package list, and upgrades all installed packages from official repositories and AUR.
+.P
+The script also provides an optional feature to rate and update the package mirrors for improved download speeds. After the update is complete, the user is prompted to reboot the system.
+.SH OPTIONS
+.TP
+.B \-v, \-\-version
+Display the script version.
+.TP
+.B \-h, \-\-help
+Display this help message.
+.TP
+.B \-m, \-mirrors
+Rate mirrors before updating.
+.TP
+.B \-S \fIpackages\fR
+Install packages (official or AUR).
+.TP
+.B \-y
+Refresh package databases.
+.TP
+.B \-u
+Upgrade packages.
+.TP
+.B \-q
+Quiet mode.
+.TP
+.B \-\-noconfirm
+Do not ask for confirmation.
+.P
+If no options are provided, defaults to -Syu (update).
+.SH EXAMPLES
+To simply run a standard system update:
+.P
+.B pickles-update
+.P
+To update the system and also rate the mirrors beforehand:
+.P
+.B pickles-update -m
+.P
+To display the script's version:
+.P
+.B pickles-update -v
+.P
+To install packages:
+.P
+.B pickles-update -S package1 package2
+.SH NOTES
+.RS
+.IP *
+This script requires
+.B rate-mirrors
+,
+.B git
+,
+.B curl
+to be installed on the system.
+.IP *
+The script should not be run with
+.B sudo
+; it will use
+.B sudo
+as required.
+.IP *
+A reboot is often recommended after a significant system update to ensure all changes take effect.
+.RE
+.SH SEE ALSO
+.BR pacman (8),
+.BR rate-mirrors (1)
